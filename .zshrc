@@ -1,76 +1,45 @@
-# Source zsh plugins
-source $(brew --prefix)/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Aliases for common dirs
-alias home="cd ~"
+export ZSH="$HOME/.oh-my-zsh"
 
-# System Aliases
-alias ..="cd .."
-alias x="exit"
+# ------
+# SSH-AGENT
+eval "$(ssh-agent -s)"
+# ------
 
-# Git Aliases
-alias add="git add"
-alias commit="git commit"
-alias pull="git pull"
-alias stat="git status"
-alias gdiff="git diff HEAD"
-alias vdiff="git difftool HEAD"
-alias log="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias cfg="git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
-alias push="git push"
-alias g="lazygit"
+# ------
+# NORMINETTE
+export PATH="$HOME/.local/bin:$PATH"
+# -------
 
-eval "$(starship init zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+ZSH_THEME="robbyrussell"
+CASE_SENSITIVE="true"
+ENABLE_CORRECTION="true"
 
-alias ssh="TERM=xterm-256color ssh"
+plugins=(git)
 
-alias n="nnn"
-function nnn () {
-  command nnn "$@"
+source $ZSH/oh-my-zsh.sh
 
-  if [ -f "$NNN_TMPFILE" ]; then
-          . "$NNN_TMPFILE"
-  fi
-}
+# -------
+# INFO
+export USER="aapadill"
+export MAIL="aapadill@student.hive.fi"
+# -------
 
-function kill () {
-  command kill -KILL $(pidof "$@")
-}
+# -------
+# ALIASES
+# -------
+alias l="ls" # List files in current directory
+alias ll="ls -al" # List all files in current directory in long list format
+alias o="open ." # Open the current directory in Finder
+alias n="norminette -R CheckDefine" #run norminette with flags
+alias ccft="cc -Wall -Wextra -Werror" #cc with 42 flags
+alias gccft="gcc -Wall -Wextra -Werror" #gcc with 42 flags
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
 
-function suyabai () {
-  SHA256=$(shasum -a 256 /opt/homebrew/bin/yabai | awk "{print \$1;}")
-  if [ -f "/private/etc/sudoers.d/yabai" ]; then
-    sudo sed -i '' -e 's/sha256:[[:alnum:]]*/sha256:'${SHA256}'/' /private/etc/sudoers.d/yabai
-  else
-    echo "sudoers file does not exist yet"
-  fi
-}
+# Created by `pipx` on 2024-04-16 16:45:15
+# export PATH="$PATH:/Users/deblish/.local/bin"
 
-# Color Scheme
-export BLACK=0xff181819
-export WHITE=0xffe2e2e3
-export RED=0xfffc5d7c
-export GREEN=0xff9ed072
-export BLUE=0xff76cce0
-export YELLOW=0xffe7c664
-export ORANGE=0xfff39660
-export MAGENTA=0xffb39df3
-export GREY=0xff7f8490
-export TRANSPARENT=0x00000000
-export BG0=0xff2c2e34
-export BG1=0xff363944
-export BG2=0xff414550
+alias francinette=/Users/deblish/francinette/tester.sh
 
-source "$HOME/.cargo/env"
-
-# Only load conda into path but dont actually use the bloat that comes with it
-export PATH="$HOME/miniforge3/bin:/usr/local/anaconda3/bin:$PATH:$(brew --prefix)/opt/llvm/bin"
-export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
-export NNN_OPTS="AdHoU"
-export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
-export EDITOR="$(which hx)"
-export VISUAL="$(which hx)"
-export MANPAGER="$(which nvim) +Man!"
-export XDG_CONFIG_HOME="$HOME/.config"
+alias paco=/Users/deblish/francinette/tester.sh

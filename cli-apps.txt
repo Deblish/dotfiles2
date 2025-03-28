@@ -1,0 +1,14 @@
+ffmpeg
+imagemagick
+wget
+telnet
+tldr
+speedtest-cli
+taskell
+ata
+mas
+mpv
+c2048
+htop
+yt-dlp
+
